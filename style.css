@@ -1,0 +1,322 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0d1524;
+    color: #e8eef8;
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background: #111e32;
+    padding: 22px 15px;
+    flex-shrink: 0;
+}
+
+.sidebar h2 {
+    font-size: 19px;
+    color: #35d39a;
+}
+
+.subtitle {
+    color: #8fa1bb;
+    font-size: 12px;
+    margin-bottom: 30px;
+}
+
+.menu button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: transparent;
+    color: #c0ccdc;
+    padding: 14px 12px;
+    margin: 4px 0;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.menu button:hover,
+.menu button.active {
+    background: #253953;
+    color: white;
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+    padding: 30px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.topbar h1 {
+    margin-bottom: 5px;
+}
+
+#today, .small {
+    color: #8fa1bb;
+    font-size: 12px;
+}
+
+.status {
+    color: #35d39a;
+    font-size: 12px;
+}
+
+.welcome {
+    background: linear-gradient(120deg, #17434a, #203354);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.welcome p {
+    color: #c2d1e1;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card, .panel {
+    background: #18263c;
+    border: 1px solid #293c57;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.card p, .card small {
+    color: #9aabc2;
+}
+
+.card h2 {
+    font-size: 27px;
+}
+
+.green {
+    color: #35d39a;
+}
+
+.red {
+    color: #ff6878;
+}
+
+.panel {
+    margin-top: 20px;
+}
+
+.panel p, .panel li {
+    color: #aabbd0;
+    line-height: 1.8;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.filters input,
+.filters select {
+    max-width: 100%;
+}
+
+input, select {
+    padding: 12px;
+    background: #0d192b;
+    color: white;
+    border: 1px solid #344966;
+    border-radius: 7px;
+}
+
+input {
+    width: 300px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+th, td {
+    padding: 13px;
+    border-bottom: 1px solid #30415b;
+    text-align: left;
+    font-size: 13px;
+}
+
+th {
+    color: #9aabc2;
+}
+
+.tag {
+    padding: 5px 9px;
+    border-radius: 15px;
+    font-size: 11px;
+}
+
+.tag.BUY {
+    background: #154837;
+    color: #52e0a8;
+}
+
+.tag.HOLD {
+    background: #493b1d;
+    color: #f1cf75;
+}
+
+.tag.SELL {
+    background: #4a2430;
+    color: #ff8795;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+footer {
+    color: #778ba5;
+    font-size: 11px;
+    margin-top: 40px;
+    border-top: 1px solid #293c57;
+    padding-top: 20px;
+}
+
+@media(max-width: 900px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 650px) {
+    .layout {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .menu {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .menu button {
+        min-width: 130px;
+    }
+
+    .main {
+        padding: 15px;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    input {
+        width: 100%;
+    }
+}
+
+/* =====================================
+   DONCHIAN SCANNER - TABLE DESIGN
+===================================== */
+
+#donchian .table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 18px;
+}
+
+#donchian table {
+    width: 100%;
+    min-width: 1150px;
+    border-collapse: collapse;
+}
+
+#donchian th,
+#donchian td {
+    padding: 11px 12px;
+    text-align: left;
+    border-bottom: 1px solid #26364d;
+    white-space: nowrap;
+}
+
+#donchian th {
+    background: #172b46;
+    color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+#donchian tbody tr:hover {
+    background: #1b304a;
+}
+
+#donchian .dc-signal {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    min-width: 48px;
+    text-align: center;
+}
+
+#donchian .dc-signal.buy {
+    background: #14532d;
+    color: #86efac;
+}
+
+#donchian .dc-signal.hold {
+    background: #713f12;
+    color: #fde68a;
+}
+
+#donchian .dc-signal.trim {
+    background: #7c2d12;
+    color: #fdba74;
+}
+
+#donchian .dc-signal.sell {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+#donchian #dcSearch,
+#donchian #dcSignalFilter {
+    padding: 10px;
+    margin: 8px 8px 12px 0;
+    border-radius: 6px;
+}

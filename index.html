@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Research Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <h2>📈 Stock Research Hub</h2>
+        <p class="subtitle">Personal Research Platform</p>
+
+        <div class="menu">
+            <button class="active" data-page="home">🏠 Dashboard</button>
+            <button data-page="screener">🔍 Stock Screener</button>
+            <button data-page="donchian">📈 Donchian Breakout</button>
+            <button data-page="pead">📊 PEAD Scanner</button>
+            <button data-page="stage">📉 Stage Analysis</button>
+            <button data-page="relative">⭐ Relative Strength</button>
+            <button data-page="portfolio">💼 Portfolio</button>
+            <button data-page="reports">📁 Reports</button>
+        </div>
+    </aside>
+
+    <main class="main">
+
+        <header class="topbar">
+            <div>
+                <h1 id="pageTitle">Market Overview</h1>
+                <p id="today"></p>
+            </div>
+            <span class="status">● Demo Mode</span>
+        </header>
+
+        <!-- DASHBOARD -->
+        <section id="home" class="page active">
+
+            <div class="welcome">
+                <h2>Welcome to your Stock Research Hub</h2>
+                <p>Your personal platform for stock screening, technical analysis and investment research.</p>
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+                    <p>Company Database</p>
+                    <h2>1,400</h2>
+                    <small>Planned master database</small>
+                </div>
+
+                <div class="card">
+                    <p>Donchian Breakout</p>
+                    <h2 class="green">BUY</h2>
+                    <small>Sample signal</small>
+                </div>
+
+                <div class="card">
+                    <p>PEAD Scanner</p>
+                    <h2>Active</h2>
+                    <small>Scanner section</small>
+                </div>
+
+                <div class="card">
+                    <p>Stage Analysis</p>
+                    <h2 class="green">Stage 2</h2>
+                    <small>Sample classification</small>
+                </div>
+
+            </div>
+
+            <div class="panel">
+                <h2>Research Modules</h2>
+                <p>Choose a module from the left navigation menu.</p>
+                <ul>
+                    <li>Stock screening and company database</li>
+                    <li>Donchian breakout analysis</li>
+                    <li>Positive and negative PEAD</li>
+                    <li>Stage 1, 2, 3 and 4 analysis</li>
+                    <li>Relative strength ranking</li>
+                    <li>Portfolio tracking and reports</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- STOCK SCREENER -->
+        <section id="screener" class="page">
+            <div class="panel">
+                <h2>Stock Screener</h2>
+                <p>Search and filter the sample company database.</p>
+
+<div class="filters">
+    <input type="file" id="csvFile" accept=".csv">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search symbol or company"
+    >
+
+    <select id="sectorFilter">
+        <option value="All">All Sectors</option>
+    </select>
+
+    <select id="themeFilter">
+        <option value="All">All Themes</option>
+    </select>
+
+    <select id="capFilter">
+        <option value="All">All Market Caps</option>
+        <option value="Large Cap">Large Cap</option>
+        <option value="Mid Cap">Mid Cap</option>
+        <option value="Small Cap">Small Cap</option>
+    </select>
+
+    <select id="sortCap">
+        <option value="Default">Default Order</option>
+        <option value="Large">Large to Small</option>
+        <option value="Small">Small to Large</option>
+    </select>
+</div>
+
+                <div class="table-container">
+                    <table>
+                        
+<thead>
+    <tr>
+        <th data-sort="serial">Sl No</th>
+        <th data-sort="Symbol">Symbol ↕</th>
+        <th data-sort="Company Name">Company Name ↕</th>
+        <th data-sort="Sector">Sector ↕</th>
+        <th data-sort="LTP">LTP ↕</th>
+        <th data-sort="DC Signal">DC Signal ↕</th>
+        <th data-sort="DC Chan %">DC Channel % ↕</th>
+        <th data-sort="Months BUY">Monthly BUY ↕</th>
+        <th data-sort="Months SELL">Monthly SELL ↕</th>
+        <th data-sort="DC New High D">DC High D ↕</th>
+        <th data-sort="DC New High W">DC High W ↕</th>
+        <th data-sort="DC New High M">DC High M ↕</th>
+        <th data-sort="Total Bull">Total Bull ↕</th>
+    </tr>
+</thead>
+
+                        <tbody id="stockTable"></tbody>
+                    </table>
+                </div>
+                <p id="stockCount" class="small"></p>
+            </div>
+        </section>
+
+        
+<!-- DONCHIAN -->
+<section id="donchian" class="page">
+    <div class="panel">
+        <h2>Donchian Breakout Scanner</h2>
+        <p>Scanner results from your Shaktiman MTF V6 CSV export.</p>
+
+        <div class="cards">
+            <div class="card">
+                <p>Total Stocks</p>
+                <h2 id="dcTotalStocks">0</h2>
+            </div>
+            <div class="card">
+                <p>BUY Signals</p>
+                <h2 class="green" id="dcBuyCount">0</h2>
+            </div>
+            <div class="card">
+                <p>HOLD Signals</p>
+                <h2 id="dcHoldCount">0</h2>
+            </div>
+            <div class="card">
+                <p>SELL Signals</p>
+                <h2 class="red" id="dcSellCount">0</h2>
+            </div>
+            <div class="card">
+                <p>TRIM Signals</p>
+                <h2 style="color:#fdba74;" id="dcTrimCount">0</h2>
+            </div>
+        </div>
+
+        <div class="filters">
+            <input type="text" id="dcSearch"
+                   placeholder="Search symbol or company name">
+
+            <select id="dcSignalFilter">
+                <option value="">All Signals</option>
+                <option value="BUY">BUY</option>
+                <option value="HOLD">HOLD</option>
+                <option value="TRIM">TRIM</option>
+                <option value="SELL">SELL</option>
+            </select>
+
+<select id="dcSectorFilter" multiple size="4"
+        title="Hold Ctrl to select multiple sectors">
+</select>
+
+
+<select id="dcDailyFilter">
+    <option value="">Daily DC High - All</option>
+    <option value="YES">Daily - YES</option>
+    <option value="NO">Daily - NO</option>
+</select>
+
+<select id="dcWeeklyFilter">
+    <option value="">Weekly DC High - All</option>
+    <option value="YES">Weekly - YES</option>
+    <option value="NO">Weekly - NO</option>
+</select>
+
+<select id="dcMonthlyFilter">
+    <option value="">Monthly DC High - All</option>
+    <option value="YES">Monthly - YES</option>
+    <option value="NO">Monthly - NO</option>
+</select>
+
+
+<select id="dcSort">
+    <option value="default">Default Order</option>
+    <option value="bull">Highest Total Bull</option>
+    <option value="symbol">Company Name A-Z</option>
+    <option value="buy">BUY First</option>
+</select>
+
+<button type="button" id="dcDownload">
+    Download CSV
+</button>
+
+        </div>
+
+        <p id="dcStatus">Loading scanner data...</p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sl No</th>
+                        <th>Symbol</th>
+                        <th>Company Name</th>
+                        <th>Sector</th>
+                        <th>LTP</th>
+                        <th>DC Signal</th>
+                        <th>DC Channel %</th>
+                        <th>Monthly BUY</th>
+                        <th>Monthly SELL</th>
+                        <th>DC High D</th>
+                        <th>DC High W</th>
+                        <th>DC High M</th>
+                        <th>Total Bull</th>
+                    </tr>
+                </thead>
+                <tbody id="donchianResults"></tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+        <!-- PEAD -->
+        <section id="pead" class="page">
+            <div class="cards">
+                <div class="card">
+                    <p>Positive PEAD</p>
+                    <h2 class="green">3</h2>
+                </div>
+                <div class="card">
+                    <p>Negative PEAD</p>
+                    <h2 class="red">2</h2>
+                </div>
+                <div class="card">
+                    <p>PEAD Reversal</p>
+                    <h2>1</h2>
+                </div>
+            </div>
+            <div class="panel">
+                <h2>PEAD Research</h2>
+                <p>This section will display your positive PEAD, negative PEAD and reversal scanner results.</p>
+            </div>
+        </section>
+
+        <!-- STAGE ANALYSIS -->
+        <section id="stage" class="page">
+            <div class="cards">
+                <div class="card"><p>Stage 1</p><h2>2</h2><small>Basing</small></div>
+                <div class="card"><p>Stage 2</p><h2 class="green">5</h2><small>Advancing</small></div>
+                <div class="card"><p>Stage 3</p><h2>3</h2><small>Topping</small></div>
+                <div class="card"><p>Stage 4</p><h2 class="red">2</h2><small>Declining</small></div>
+            </div>
+        </section>
+
+        <!-- RELATIVE STRENGTH -->
+        <section id="relative" class="page">
+            <div class="panel">
+                <h2>Relative Strength Ranking</h2>
+                <p>Illustrative RS scores from 0 to 3.</p>
+                <div id="rsResults"></div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO -->
+        <section id="portfolio" class="page">
+            <div class="panel">
+                <h2>Portfolio Tracker</h2>
+                <p>We will build a holdings manager with quantity, average price, current value, profit/loss and allocation.</p>
+            </div>
+        </section>
+
+        <!-- REPORTS -->
+        <section id="reports" class="page">
+            <div class="panel">
+                <h2>Reports Centre</h2>
+                <p>Future location for your Excel, CSV and PDF scanner reports.</p>
+            </div>
+        </section>
+
+        <footer>
+            Stock Research Hub | For research and educational purposes.
+            Sample data only. Not investment advice.
+        </footer>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
